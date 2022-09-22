@@ -21,6 +21,7 @@ abstract class Race {
     throw new Error('Not implemented');
   }
 
+  //  quantidade máxima de pontos de vida da raça
   abstract get maxLifePoints(): number;
 }
 
