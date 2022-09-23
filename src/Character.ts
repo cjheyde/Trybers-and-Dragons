@@ -55,7 +55,7 @@ class Character implements Fighter {
   } 
 
   // rever lógica
-  get energy(): Energy{};
+  // get energy(): Energy{};
 
   // rever logica
   receiveDamage(attackPoints: number): number {
