@@ -1,8 +1,6 @@
-import Fighter from './Fighter';
-
-export default interface SimpleFighter extends Fighter{
-  // lifePoints: number;
-  // strength: number;
+export default interface SimpleFighter{
+  lifePoints: number;
+  strength: number;
   attack: (enemy: SimpleFighter) => void;
-  // receiveDamage: (attackPoints: number) => number;
+  receiveDamage: (attackPoints: number) => number;
 }

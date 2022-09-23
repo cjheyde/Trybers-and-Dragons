@@ -1,10 +1,10 @@
-import Fighter from './Fighter';
+import Fighter, { SimpleFighter } from './Fighter';
 import Race, { Elf } from './Races';
 import Archetype, { Mage } from './Archetypes';
 import Energy from './Energy';
 import getRandomInt from './utils';
 
-abstract class Character implements Fighter {
+class Character implements Fighter {
   private _race: Race;
   private _archetype: Archetype;
   private _maxLifePoints: number;
@@ -55,11 +55,12 @@ abstract class Character implements Fighter {
   } 
 
   // rever lógica
-  abstract get energy(): Energy;
+  get energy(): Energy{};
 
   // rever logica
   receiveDamage(attackPoints: number): number {
     const damage = this._defense - attackPoints;
+    // lifepoints - damage?
     if (damage > 0) {
       this._lifePoints -= 1;
     }
@@ -69,7 +70,7 @@ abstract class Character implements Fighter {
     return this._lifePoints;
   }
 
-  attack(enemy: Fighter): void {
+  attack(enemy: SimpleFighter): void {
     enemy.receiveDamage(this._strength);
   }
 
