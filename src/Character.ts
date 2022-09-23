@@ -86,9 +86,7 @@ abstract class Character implements Fighter {
   }
 
   // implementação livre
-  // special(): undefined {
-
-  // };
+  // special(): undefined {};
 }
 
 export default Character;
