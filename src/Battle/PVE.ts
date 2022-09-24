@@ -26,9 +26,7 @@ class PVE extends Battle {
         this.charFighter.attack(opponent);
       }
       opponent.attack(this.charFighter);
-      if (this.charFighter.lifePoints <= 0 || opponent.lifePoints <= 0) {
-        return super.fight();
-      }
+      return super.fight();
     });
     return super.fight();
   }
