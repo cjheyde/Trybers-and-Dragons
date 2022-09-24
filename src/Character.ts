@@ -54,8 +54,9 @@ class Character implements Fighter {
     return this._dexterity;
   } 
 
-  // rever lógica
-  // get energy(): Energy{};
+  get energy(): Energy {
+    return { ...this._energy };
+  }
 
   // rever logica
   receiveDamage(attackPoints: number): number {
@@ -74,15 +75,20 @@ class Character implements Fighter {
     enemy.receiveDamage(this._strength);
   }
 
+  checkMaxPoints(points: number): number {
+    if (points >= this._race.maxLifePoints) {
+      return this._race.maxLifePoints;
+    }
+    return points;
+  }
+
   levelUp(): void {
-    this._maxLifePoints += getRandomInt(1, 10);
+    const currPoints = this._maxLifePoints + getRandomInt(1, 10);
+    this._maxLifePoints = this.checkMaxPoints(currPoints);
     this._strength += getRandomInt(1, 10);
     this._dexterity += getRandomInt(1, 10);
     this._defense += getRandomInt(1, 10);
     this._energy.amount = 10;
-    if (this._maxLifePoints >= this._race.maxLifePoints) {
-      this._maxLifePoints = this._race.maxLifePoints;
-    }
     this._lifePoints = this._maxLifePoints;
   }
 
