@@ -14,14 +14,14 @@ class Character implements Fighter {
   private _dexterity: number;
   private _energy: Energy;
   private _name: string;
-  
+
   constructor(name: string) { 
     this._dexterity = getRandomInt(1, 10);
     this._name = name;
     this._race = new Elf(this._name, this._dexterity);
     this._archetype = new Mage(this._name);
     this._maxLifePoints = this._race.maxLifePoints / 2;
-    this._lifePoints = this._race.maxLifePoints;
+    this._lifePoints = this._maxLifePoints;
     this._strength = getRandomInt(1, 10);
     this._defense = getRandomInt(1, 10);
     this._energy = {
@@ -58,12 +58,14 @@ class Character implements Fighter {
     return { ...this._energy };
   }
 
-  // rever logica
+  get name(): string {
+    return this._name;
+  }
+
   receiveDamage(attackPoints: number): number {
-    const damage = this._defense - attackPoints;
-    // lifepoints - damage?
+    const damage = attackPoints - this._defense;
     if (damage > 0) {
-      this._lifePoints -= 1;
+      this._lifePoints -= damage;
     }
     if (this._lifePoints <= 0) {
       this._lifePoints = -1;
@@ -75,20 +77,15 @@ class Character implements Fighter {
     enemy.receiveDamage(this._strength);
   }
 
-  checkMaxPoints(points: number): number {
-    if (points >= this._race.maxLifePoints) {
-      return this._race.maxLifePoints;
-    }
-    return points;
-  }
-
   levelUp(): void {
-    const currPoints = this._maxLifePoints + getRandomInt(1, 10);
-    this._maxLifePoints = this.checkMaxPoints(currPoints);
+    this._maxLifePoints += getRandomInt(1, 10);
     this._strength += getRandomInt(1, 10);
     this._dexterity += getRandomInt(1, 10);
     this._defense += getRandomInt(1, 10);
     this._energy.amount = 10;
+    if (this._maxLifePoints >= this._race.maxLifePoints) {
+      this._maxLifePoints = this._race.maxLifePoints;
+    }
     this._lifePoints = this._maxLifePoints;
   }
 
