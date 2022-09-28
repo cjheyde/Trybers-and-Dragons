@@ -19,12 +19,15 @@ class PVP extends Battle {
     return this._char2;
   }
 
-  // da o veredito da batalha: 1 if player wins, -1 otherwise
   fight(): number {
-    if (this.char1.levelUp >= this.char2.levelUp) {
+    if (this.char1.strength > this.char2.defense 
+      || this.char2.strength > this.char1.defense) {
       this.char1.attack(this.char2);
+    } else return 0;
+    if (this.char1.lifePoints > -1 && this.char2.lifePoints > -1) {
+      this.char2.attack(this.char1);
+      return this.fight();
     }
-    this.char2.attack(this.char1);
     return super.fight();
   }
 }
