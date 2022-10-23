@@ -15,12 +15,10 @@ abstract class Race {
     return this._dexterity;
   }
 
-  // quantidade de instâncias criadas a partir das classes estendidas da classe Race
   static createdRacesInstances(): number {
     throw new Error('Not implemented');
   }
 
-  //  quantidade máxima de pontos de vida da raça
   abstract get maxLifePoints(): number;
 }
 
